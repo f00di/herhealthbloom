@@ -1,0 +1,25 @@
+# Launch Checklist
+
+- [ ] Production domain confirmed
+- [ ] DNS configured
+- [ ] HTTPS active
+- [x] Site title/brand confirmed from supplied material
+- [x] Supplied logo implemented
+- [ ] Contact email confirmed
+- [ ] Form tested end to end
+- [ ] Privacy page reviewed
+- [ ] Medical disclaimer reviewed
+- [ ] Medical content owner review/sign-off recorded (source files are imported)
+- [x] Sitemap tested locally
+- [x] `robots.txt` tested locally
+- [ ] Canonical URLs checked on final production domain (localhost output checked)
+- [x] Metadata checked locally
+- [x] Open Graph checked locally
+- [x] 404 checked locally
+- [x] Mobile tested locally at required widths
+- [ ] Accessibility checked
+- [ ] Lighthouse checked
+- [x] Analytics decision for current scope confirmed: none installed
+- [x] No secrets found/committed
+- [x] Production build passed
+- [ ] Deployment verified

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Supportive pregnancy education</title><desc id="desc">An abstract line form with protective leaves in muted rose and sage.</desc>
+  <rect width="1200" height="675" fill="#F6EEEC"/>
+  <circle cx="780" cy="280" r="230" fill="#DDEAE6"/>
+  <circle cx="360" cy="430" r="170" fill="#ECD9DE"/>
+  <g fill="none" stroke="#426D67" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M590 154c-72 75-92 159-61 253 30 89 102 136 214 139"/>
+    <path d="M610 215c91 7 156 54 191 142-78 43-150 52-215 27"/>
+    <path d="M500 425c-70-21-125-9-165 37 43 66 100 91 171 77"/>
+  </g>
+  <path d="M713 202c-35 0-63 28-63 63 0 53 63 101 63 101s63-48 63-101c0-35-28-63-63-63Z" fill="#8A4F5D"/>
+  <path d="M713 219v89M669 264h88" stroke="#fff" stroke-width="18" stroke-linecap="round"/>
+</svg>

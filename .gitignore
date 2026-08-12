@@ -1,0 +1,17 @@
+# dependencies
+/node_modules
+
+# next/build output
+/.next
+/out
+/coverage
+
+# local environment files (examples remain tracked)
+.env*
+!.env.example
+
+# local/editor/platform files
+.DS_Store
+*.log
+.vercel
+*.tsbuildinfo

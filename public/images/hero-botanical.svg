@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="640" viewBox="0 0 760 640" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract women's health education illustration</title>
+  <desc id="desc">Soft rose and sage botanical forms surrounding an open book and a small medical cross.</desc>
+  <rect width="760" height="640" rx="48" fill="#F7EFEC"/>
+  <circle cx="555" cy="172" r="105" fill="#D9E7E2"/>
+  <circle cx="177" cy="425" r="124" fill="#EBD9DD"/>
+  <path d="M380 169c-68 0-121 32-149 73v218c37-31 87-47 149-47s112 16 149 47V242c-28-41-81-73-149-73Z" fill="#fff" stroke="#426D67" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M380 169v244" fill="none" stroke="#426D67" stroke-width="8"/>
+  <path d="M286 265c27-18 57-27 94-27M286 316c27-18 57-27 94-27M474 265c-27-18-57-27-94-27M474 316c-27-18-57-27-94-27" fill="none" stroke="#C7D8D2" stroke-width="8" stroke-linecap="round"/>
+  <g fill="none" stroke="#8A4F5D" stroke-width="9" stroke-linecap="round">
+    <path d="M176 375c-28-62-17-125 31-174"/>
+    <path d="M205 310c-45-6-76 6-96 37M213 272c20-44 52-64 94-64"/>
+    <path d="M589 411c35-60 35-123 0-186"/>
+    <path d="M594 335c44 1 76 19 94 54M590 288c-15-46-45-70-87-76"/>
+  </g>
+  <g fill="#8A4F5D">
+    <rect x="596" y="112" width="26" height="78" rx="8"/>
+    <rect x="570" y="138" width="78" height="26" rx="8"/>
+  </g>
+</svg>
