@@ -1,35 +1,36 @@
 # Security
 
-## Threat Surface
+## Threat Surface and Controls
 
-The public static pages have a small attack surface. Material risks are contact spam/abuse, injection into email, oversized or malformed requests, exposed provider secrets, malicious reference URLs, dependency vulnerabilities, unsafe content rendering, and accidental collection/logging of health information.
+The published application is a static, read-only site. It has no database, accounts, payments, uploads, runtime API, analytics, or application cookie. That substantially reduces the attack surface.
 
-## Controls
+- Article input is repository-controlled JSON validated during the build. Image paths must be local and reference URLs must use HTTPS.
+- User-entered contact text remains in the browser until the visitor chooses to send it through their own email application. It is not rendered as HTML, posted to this site, logged by an application server, or stored by the site.
+- No file upload or medical-record field exists. Prominent copy warns against including sensitive health data and against using contact for emergencies.
+- Local images have fixed dimensions; there are no third-party embeds or browser scripts.
+- The deployment workflow has read-only repository access plus the minimum Pages and identity permissions required for deployment. Quality gates run before artifact upload.
+- `.env*` files are ignored except the placeholder example. `NEXT_PUBLIC_` variables are explicitly public and must never contain secrets.
 
-- Contact JSON is server-validated for type, required fields, length, email syntax, honeypot, and reasonable completion time.
-- A best-effort per-IP in-memory window limits bursts; production-scale abuse protection should move to a shared edge/rate-limit store or provider controls.
-- User input is encoded as plain text/escaped HTML before provider delivery and never rendered with `dangerouslySetInnerHTML`.
-- Only same-origin form submission is expected; restrictive security headers are configured and `/api` is not indexed.
-- Provider variables are server-only. No API key uses a public prefix.
-- No file uploads, medical-record fields, database, accounts, payments, or persistent contact storage exist.
-- Content URLs accept only local images and safe HTTPS reference links during validation.
-- Error responses do not echo secrets or provider payloads.
+## GitHub Pages Limitation
 
-## Secrets
+Static export cannot apply Next.js response headers, and GitHub Pages does not expose application-level header configuration. The site therefore cannot enforce a custom CSP, frame policy, HSTS policy, or Permissions Policy from this repository. Inspect GitHub’s actual production headers after deployment. If custom security headers become mandatory, place an approved configurable CDN in front of the site or move to a host that supports them, then test all required resources before enforcing a policy.
 
-Secrets must never be committed, placed in browser variables, screenshots, logs, or documentation. `.env.example` contains names/placeholders only. Vercel environment configuration owns production values. If exposed, revoke/rotate the value and inspect Git history/logs; deleting only the current file is insufficient.
+## Secrets and Account Safety
+
+No production secret is required. `NEXT_PUBLIC_CONTACT_EMAIL` is a public repository variable and becomes visible in the page source. Never place credentials, private API keys, password-bearing URLs, tokens, or sensitive data in GitHub variables intended for browser use, repository files, screenshots, Actions logs, or documentation. If a secret is exposed, revoke/rotate it immediately and inspect Git history and logs; deleting the current file is insufficient.
+
+Protect the GitHub, registrar, and email accounts with MFA and documented owner recovery. Use branch/environment protection where available.
 
 ## Dependency Security
 
-Keep direct dependencies minimal, commit the lockfile, review automated advisories, run `npm audit` as a signal (not proof), prioritize runtime/high-severity findings, and validate framework security releases before deployment.
+Keep direct dependencies minimal, retain the lockfile, review automated advisories, run `npm audit` as a signal rather than proof, prioritize applicable runtime/high-severity findings, and validate framework security releases before deployment.
 
 ## Review Checklist
 
-- [x] No secret or real credential found in repository scan
-- [x] Contact validation, honeypot, timing, and rate tests pass
-- [ ] Production recipient/sender/API key configured server-side
-- [ ] Email-provider domain and sender verified
-- [x] Security headers inspected on local production output
-- [x] Source references imported and URL format validated; ongoing link review required
+- [x] No secret or credential found in the repository scan
+- [x] Contact validation and no-delivery-claim behavior covered by tests
+- [x] No server API, storage, analytics, upload, or account surface
+- [x] Source references and local image paths validated at build time
 - [x] Dependency audit passed with 0 vulnerabilities on 2026-08-12
-- [ ] Logs checked to ensure message bodies/health data are not unnecessarily retained
+- [ ] GitHub account, Pages environment, branch protection, and MFA verified by the owner
+- [ ] Production response headers and published artifact inspected after deployment

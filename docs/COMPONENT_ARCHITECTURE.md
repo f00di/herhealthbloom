@@ -21,6 +21,6 @@
 | `RelatedArticles` | internal links from valid related slugs | Server | article summaries |
 | `AuthorBox` | exact supplied author name/credentials | Server | centralized author data |
 | `MedicalDisclaimer` | consistent educational limitation | Server | compact/full variant |
-| `ContactForm` | validation, submission, live states | Client | endpoint only |
+| `ContactForm` | validation, mailto draft preparation, unavailable state | Client | public contact email |
 
 Generic presentational elements stay server-renderable. Client boundaries are limited to pathname state, menu focus, search state, and form state.

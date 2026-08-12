@@ -1,4 +1,4 @@
-export const contactLimits = { name: 100, email: 254, message: 3000 } as const;
+export const contactLimits = { name: 100, email: 254, message: 1500 } as const;
 
 export type ContactFields = { name: string; email: string; message: string };
 export type ContactErrors = Partial<Record<keyof ContactFields, string>>;
@@ -18,11 +18,4 @@ export function validateContactFields(fields: ContactFields): ContactErrors {
   else if (message.length < 10) errors.message = "Message must be at least 10 characters.";
   else if (message.length > contactLimits.message) errors.message = `Message must be ${contactLimits.message} characters or fewer.`;
   return errors;
-}
-
-export function isContactFields(value: unknown): value is ContactFields & { website?: string; startedAt?: number } {
-  if (typeof value !== "object" || value === null || Array.isArray(value)) return false;
-  const record = value as Record<string, unknown>;
-  return typeof record.name === "string" && typeof record.email === "string" && typeof record.message === "string" &&
-    (record.website === undefined || typeof record.website === "string") && (record.startedAt === undefined || typeof record.startedAt === "number");
 }

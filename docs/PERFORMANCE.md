@@ -2,12 +2,12 @@
 
 ## Strategy
 
-- Statically generate public content and article pages; keep contact as the only dynamic endpoint.
+- Statically export every route; no runtime endpoint or server-rendered request exists.
 - Limit client JavaScript to header state, article search, and contact form. Native disclosure elements avoid accordion libraries.
 - Use system font stacks, eliminating font network requests and layout shifts.
 - Serve owned local SVGs with fixed aspect ratios. Future raster images use `next/image`, explicit dimensions, modern formats, and lazy loading below the fold.
 - Add no analytics, embeds, autoplay media, animation package, CMS SDK, or third-party browser script.
-- Let Vercel/Next cache immutable assets; do not publicly cache contact responses or private/user-specific data.
+- Let GitHub Pages cache fingerprinted Next.js assets; the site serves no private/user-specific responses.
 
 ## Core Web Vitals Considerations
 
@@ -22,4 +22,4 @@ The hero contains text and a lightweight local illustration, keeping LCP determi
 - [x] Verify noncritical image behavior and stable dimensions
 - [ ] Check mobile throttling and LCP element
 - [x] Confirm no visible layout shift from menu, cards, or form errors in local QA
-- [ ] Review cache headers after Vercel deployment
+- [ ] Review cache headers after GitHub Pages deployment

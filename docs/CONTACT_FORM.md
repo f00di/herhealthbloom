@@ -1,24 +1,9 @@
-# Contact Form
+# Static Contact Experience
 
-## Fields and UX
+GitHub Pages cannot run a contact API. When `NEXT_PUBLIC_CONTACT_EMAIL` is configured, the page validates `name`, `email`, and `message`, then opens a prefilled `mailto:` draft in the visitor’s email application. The site does not transmit, store, or claim to have delivered the message. The visitor must review and send it from their email application.
 
-The form accepts required `name`, `email`, and `message`; a hidden honeypot and form-start timestamp support abuse checks. There are no appointment, symptom, diagnosis, prescription, or upload fields. Client validation provides immediate accessible errors; the server repeats all authoritative validation. Loading disables repeat submission, and live regions announce success/error.
+Without a configured public address, the page displays an explicit unavailable state and renders no form controls. No address is fabricated.
 
-## Server Architecture
+There are no appointment, symptom, diagnosis, prescription, or upload fields. The page warns visitors not to include medical records, laboratory reports, imaging, prescription details, or other sensitive health information, and directs emergencies to an appropriate emergency healthcare service.
 
-`POST /api/contact` accepts JSON only, enforces both declared and actual UTF-8 body size plus field limits, rejects suspicious honeypot/too-fast submissions, applies a best-effort IP rate window, escapes message content, and sends through Resend's HTTPS API only when configured. It does not write to a database. Without credentials, it returns `503` and instructs the user that delivery is unavailable; it never reports false success.
-
-## Environment Variables
-
-- `RESEND_API_KEY`
-- `CONTACT_TO_EMAIL`
-- `CONTACT_FROM_EMAIL`
-- `NEXT_PUBLIC_SITE_URL` (not an email secret; required for canonical production URL)
-
-## Privacy and Emergency Warning
-
-The page states: do not submit confidential medical information, personal health records, laboratory reports, imaging studies, prescription details, or other sensitive health information. The form is not monitored as an emergency service; users who believe they have an emergency should contact an appropriate emergency healthcare service.
-
-## Production Hardening
-
-Verify the sender domain, configure provider retention/security, set provider-level abuse controls, consider a shared serverless rate limiter if traffic warrants it, monitor delivery failures without logging message bodies, and perform an end-to-end delivery test after deploy.
+If reliable in-page delivery is required later, move to a server-capable host or add an owner-approved form processor only after reviewing its privacy terms, retention, regional processing, spam controls, accessibility, verified delivery, and policy disclosures. Never place provider API keys in browser-visible variables.

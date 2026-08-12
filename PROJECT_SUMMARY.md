@@ -54,4 +54,4 @@ Trustworthy, professional, evidence-based, patient-friendly, mobile-first, fast,
 
 ## Current Status
 
-**Deployment ready with external launch gates.** Repository implementation and local QA are complete. Public launch still requires the final domain, approved contact configuration, owner/medical/legal review, live email verification, and post-deployment accessibility/SEO checks.
+**GitHub Pages ready with external launch gates.** The repository now produces a full static export and includes a gated Pages deployment workflow. Public launch still requires enabling GitHub Actions as the Pages source, owner/medical/legal review, a decision on the optional public contact address/custom domain, and post-deployment accessibility/SEO checks.

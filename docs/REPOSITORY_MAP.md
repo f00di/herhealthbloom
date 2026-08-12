@@ -5,11 +5,12 @@ This map reflects the implemented repository.
 ```text
 /
 ├── content/articles/       one validated structured file per article
+├── .github/workflows/      gated GitHub Pages build and deployment
 ├── docs/                   architecture, governance, QA, and operations
 ├── public/images/          owned local visual assets
 ├── source-documents/       six authoritative DOCX source files
 ├── src/
-│   ├── app/                routes, metadata routes, API, error boundaries
+│   ├── app/                static routes, metadata routes, error boundaries
 │   ├── components/         article, form, layout, search, and UI components
 │   ├── config/             site and topic source of truth
 │   ├── lib/                loaders, validators, search, metadata/schema helpers
@@ -20,9 +21,9 @@ This map reflects the implemented repository.
 ├── README.md               concise developer entry point
 ├── package.json            scripts, runtime contract, direct dependencies
 ├── package-lock.json       reproducible npm dependency graph
-├── next.config.ts          framework and security-header configuration
+├── next.config.ts          static export and Pages base-path configuration
 ├── vitest.config.ts        automated-test configuration
 └── .env.example            variable names only; no credentials
 ```
 
-Generated output (`.next`, coverage) and local environment files are ignored. Content never lives inside bespoke route components.
+Generated output (`.next`, `out`, coverage) and local environment files are ignored. Content never lives inside bespoke route components.

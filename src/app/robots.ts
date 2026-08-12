@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getSiteOrigin } from "@/config/site";
+import { getAbsoluteUrl, getSiteUrl } from "@/config/site";
+
+export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
-  const origin = getSiteOrigin();
-  return { rules: { userAgent: "*", allow: "/", disallow: ["/api/"] }, sitemap: `${origin}/sitemap.xml`, host: origin };
+  const siteUrl = getSiteUrl();
+  return { rules: { userAgent: "*", allow: "/" }, sitemap: getAbsoluteUrl("/sitemap.xml"), host: new URL(siteUrl).origin };
 }

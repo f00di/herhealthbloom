@@ -8,7 +8,7 @@ Read [Project Summary](PROJECT_SUMMARY.md) for scope and status.
 
 ## Technology
 
-Next.js 16 App Router, React 19, strict TypeScript, tokenized CSS, validated structured JSON articles, and Vitest/Testing Library. Public content is statically generated where possible; the query-aware article index and optional contact endpoint render dynamically.
+Next.js 16 App Router, React 19, strict TypeScript, tokenized CSS, validated structured JSON articles, and Vitest/Testing Library. The entire site is exported as static HTML for GitHub Pages; topic filtering and email-draft preparation run in small client-side islands.
 
 ## Getting Started
 
@@ -16,7 +16,6 @@ Requirements: Node.js 20.9+ and npm.
 
 ```bash
 npm install
-cp .env.example .env.local
 npm run dev
 ```
 
@@ -24,7 +23,7 @@ Open `http://localhost:3000`.
 
 ## Environment Variables
 
-`NEXT_PUBLIC_SITE_URL` sets the canonical origin. `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, and `CONTACT_FROM_EMAIL` enable live contact delivery and must remain server-only. The form returns an honest unavailable response when they are absent. See [environment variable documentation](docs/ENVIRONMENT_VARIABLES.md).
+The deployment workflow obtains the canonical URL and project base path from GitHub Pages. The optional `NEXT_PUBLIC_CONTACT_EMAIL` repository variable enables the page to prepare a `mailto:` draft; it is public and must not be treated as a secret. See [environment variable documentation](docs/ENVIRONMENT_VARIABLES.md).
 
 ## Development and Testing
 
@@ -39,12 +38,13 @@ npm run validate:content
 
 ```bash
 npm run build
-npm start
 ```
+
+`npm run build` writes the deployable site to `out/`.
 
 ## Deployment
 
-Connect the GitHub repository to Vercel, add approved environment values, deploy a preview, then complete the medical/legal/content, domain, email, accessibility, responsive, and SEO launch checks. See [Deployment](docs/DEPLOYMENT.md).
+In the repository, select **Settings → Pages → Source → GitHub Actions**, then push to `main` or run the workflow manually. The workflow gates deployment on lint, typecheck, tests, and a static export before publishing `out/`. See [Deployment](docs/DEPLOYMENT.md).
 
 ## Content Publishing
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getTopic } from "@/config/topics";
+import { withBasePath } from "@/config/site";
 import type { Article } from "@/types/article";
 
 function formatDate(value: string) {
@@ -23,6 +24,6 @@ export function ArticleHeader({ article }: { article: Article }) {
     <p className="article-deck">{article.excerpt}</p>
     <ArticleMeta article={article} />
     {article.contentStatus !== "complete" ? <p className="content-status"><strong>Content status:</strong> Authoritative source document missing. Clinical content is not published.</p> : null}
-    {article.featuredImage ? <div className="article-featured-image"><Image src={article.featuredImage.src} alt={article.featuredImage.alt} width={article.featuredImage.width} height={article.featuredImage.height} priority sizes="(max-width: 900px) 100vw, 840px" /></div> : null}
+    {article.featuredImage ? <div className="article-featured-image"><Image src={withBasePath(article.featuredImage.src)} alt={article.featuredImage.alt} width={article.featuredImage.width} height={article.featuredImage.height} priority sizes="(max-width: 900px) 100vw, 840px" /></div> : null}
   </header>;
 }

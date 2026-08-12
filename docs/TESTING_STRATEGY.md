@@ -4,13 +4,13 @@
 
 - TypeScript: strict project validation (`npm run typecheck`).
 - Lint: Next/ESLint static checks (`npm run lint`).
-- Unit/API: content validation, search normalization/filtering, contact validation/rate behavior, malformed/oversized request handling, and disabled-delivery behavior.
-- Component: search/filter UI, FAQ native disclosures, contact client validation, and mobile navigation behavior where practical.
+- Unit: content validation, search normalization/filtering, and contact field validation.
+- Component: search/filter UI, FAQ native disclosures, contact mailto/unavailable behavior, and mobile navigation behavior where practical.
 - Integration/repository smoke: required routes/files, article discovery, slugs, navigation count, metadata endpoints, and 404 presence.
-- Build: `npm run build` validates static generation, metadata, imports, and route compilation.
+- Build: `npm run build` validates the complete static export, metadata, imports, and route compilation; release checks also simulate the Pages project base path.
 - Accessibility: semantic/component assertions plus manual keyboard, contrast, zoom, and screen-reader checklist.
 - Responsive/visual: production pages at 320, 375, 390, 768, 1024, 1280, and 1440px.
-- End-to-end: defer a heavyweight browser dependency unless static smoke/component coverage proves insufficient; live email delivery always needs a deployed manual check.
+- End-to-end: defer a heavyweight browser dependency unless static smoke/component coverage proves insufficient; the live Pages artifact still needs a deployed smoke check.
 
 ## Critical Workflows
 

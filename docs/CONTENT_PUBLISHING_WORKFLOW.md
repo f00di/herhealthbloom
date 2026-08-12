@@ -11,7 +11,7 @@ Only medically approved content should move to `complete`.
 7. Record real publication/update dates only when known and set `contentStatus` accurately.
 8. Run `npm run validate:content`, `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build`.
 9. Preview headings, table of contents, warnings, tables, references, long URLs, mobile layout, metadata, and related links.
-10. Commit/push after medical approval; Vercel builds automatically. Verify the production URL and sitemap.
+10. Commit/push after medical approval; GitHub Actions validates and deploys `main` to Pages. Verify the deployment URL, article, and sitemap.
 
 ## Example Record
 

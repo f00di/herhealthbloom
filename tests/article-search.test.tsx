@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import { ArticleSearch } from "@/components/search/article-search";
@@ -22,9 +22,10 @@ describe("ArticleSearch", () => {
     await user.click(screen.getByRole("button", { name: "Clear search and filters" }));
     expect(screen.getByText("2 articles found")).toBeInTheDocument();
   });
-  it("supports a valid initial topic", () => {
-    render(<ArticleSearch articles={articles} initialTopic="pregnancy" />);
-    expect(screen.getByText("1 article found")).toBeInTheDocument();
+  it("reads a valid topic from the browser URL", async () => {
+    window.history.replaceState({}, "", "/articles?topic=pregnancy");
+    render(<ArticleSearch articles={articles} />);
+    await waitFor(() => expect(screen.getByText("1 article found")).toBeInTheDocument());
     expect(screen.getByRole("button", { name: "Pregnancy" })).toHaveAttribute("aria-pressed", "true");
     fireEvent.change(screen.getByLabelText("Search articles"), { target: { value: "pain" } });
     expect(screen.getByRole("link", { name: "Abdominal Pain During Pregnancy" })).toBeInTheDocument();

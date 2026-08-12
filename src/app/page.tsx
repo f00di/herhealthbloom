@@ -5,7 +5,7 @@ import { ArticleGrid } from "@/components/article/article-card";
 import { HealthTopicCard } from "@/components/home/health-topic-card";
 import { ArrowIcon } from "@/components/ui/icons";
 import { healthTopics } from "@/config/topics";
-import { siteConfig } from "@/config/site";
+import { siteConfig, withBasePath } from "@/config/site";
 import { getAllArticles, toArticleSummary } from "@/lib/articles";
 import { createPageMetadata } from "@/lib/metadata";
 
@@ -20,7 +20,7 @@ export default async function HomePage() {
       <p className="hero-support">Evidence-Based Information and Education in Gynecology, Pregnancy, and Breast Health</p>
       <p>Welcome to the educational and informative website of {siteConfig.author.name} ({siteConfig.author.credentials}), {siteConfig.author.role}, dedicated to providing accurate, evidence-based information on women’s health. The mission is to help women better understand their health through clear and reliable medical resources.</p>
       <div className="button-row"><Link className="button button-primary" href="/articles">Explore Articles <ArrowIcon /></Link><Link className="button button-secondary" href="#health-topics">Browse Health Topics</Link></div>
-    </div><div className="hero-art"><Image src="/images/hero-botanical.svg" width={760} height={640} alt="Open book surrounded by calm botanical shapes, representing accessible women’s health education" priority sizes="(max-width: 900px) 92vw, 560px" /></div></div></section>
+    </div><div className="hero-art"><Image src={withBasePath("/images/hero-botanical.svg")} width={760} height={640} alt="Open book surrounded by calm botanical shapes, representing accessible women’s health education" priority sizes="(max-width: 900px) 92vw, 560px" /></div></div></section>
 
     <section className="section" aria-labelledby="latest-heading"><div className="container"><div className="section-heading"><div><p className="eyebrow">Educational library</p><h2 id="latest-heading">Latest articles</h2><p>Read the current evidence-based pregnancy articles in a clear, patient-friendly format.</p></div><Link className="text-link desktop-only-link" href="/articles">View all articles <ArrowIcon /></Link></div><ArticleGrid articles={articles} /></div></section>
 

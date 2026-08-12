@@ -10,7 +10,6 @@ export const siteConfig = {
     credentials: "FCPS, MRCOG",
     role: "Obstetrician and Gynecologist",
   },
-  contactEmail: null as string | null,
   socialLinks: [] as { label: string; href: string }[],
   copyright: "© 2026 Dr. Farkhanda Kashif. All rights reserved.",
   medicalDisclaimer:
@@ -26,12 +25,33 @@ export const primaryNavigation = [
   { label: "Privacy Policy & Medical Disclaimer", href: "/privacy" },
 ] as const;
 
-export function getSiteOrigin(): string {
+export function getBasePath(): string {
+  return process.env.NEXT_PUBLIC_BASE_PATH?.trim().replace(/\/$/, "") ?? "";
+}
+
+export function withBasePath(path: string): string {
+  if (!path.startsWith("/")) throw new Error("Site paths must start with '/'.");
+  return `${getBasePath()}${path}`;
+}
+
+export function getSiteUrl(): string {
   const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!configured) return siteConfig.defaultOrigin;
+  if (!configured) return `${siteConfig.defaultOrigin}${getBasePath()}`;
   try {
-    return new URL(configured).origin;
+    const url = new URL(configured);
+    if (url.protocol !== "http:" && url.protocol !== "https:") return `${siteConfig.defaultOrigin}${getBasePath()}`;
+    return `${url.origin}${url.pathname.replace(/\/$/, "")}`;
   } catch {
-    return siteConfig.defaultOrigin;
+    return `${siteConfig.defaultOrigin}${getBasePath()}`;
   }
+}
+
+export function getAbsoluteUrl(path: string): string {
+  if (!path.startsWith("/")) throw new Error("Site paths must start with '/'.");
+  return `${getSiteUrl()}${path}`;
+}
+
+export function getContactEmail(): string | null {
+  const email = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim();
+  return email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? email : null;
 }

@@ -6,7 +6,7 @@ Make approved educational content discoverable while accurately communicating au
 
 ## URL and Canonical Strategy
 
-Stable paths are `/`, `/articles`, `/articles/<slug>`, `/about`, `/faq`, `/contact`, and `/privacy`. Topic filters use a query string but canonicalize to `/articles`; article pages self-canonicalize. `NEXT_PUBLIC_SITE_URL` is the single deployment origin and must be confirmed before launch.
+Stable paths are `/`, `/articles`, `/articles/<slug>`, `/about`, `/faq`, `/contact`, and `/privacy`. Topic filters use a query string but canonicalize to `/articles`; article pages self-canonicalize. The workflow supplies `NEXT_PUBLIC_SITE_URL` from the configured Pages URL, including the repository path when applicable.
 
 ## Metadata and Social Sharing
 
@@ -14,7 +14,7 @@ Root defaults come from site config. Every main page supplies a unique title and
 
 ## Sitemap and Robots
 
-Next.js metadata routes generate both. The sitemap reads every article record automatically and excludes the contact API. Robots permit public pages and disallow `/api/`; the sitemap uses the configured origin.
+Next.js metadata routes generate both. The sitemap reads every article record automatically, and all URLs include the Pages project path when present. Robots permit public pages; the sitemap and canonical metadata use the Pages-provided full site URL.
 
 ## Structured Data
 

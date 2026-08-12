@@ -2,7 +2,7 @@
 
 ## Architecture Goals
 
-Medical accuracy boundaries, static crawlability, low JavaScript, accessibility, simple authoring, centralized configuration, and reproducible Vercel deployment.
+Medical accuracy boundaries, static crawlability, low JavaScript, accessibility, simple authoring, centralized configuration, and reproducible GitHub Pages deployment.
 
 ## Existing Repository Assessment
 
@@ -12,7 +12,7 @@ Initial discovery found only `.gitattributes` and one Git commit; there was no a
 
 | Technology | Use | Selection reason | Existing? |
 |---|---|---|---|
-| Next.js App Router | routes, static/server rendering, metadata, endpoint | Integrated SEO and Vercel support with minimal infrastructure | No |
+| Next.js App Router | routes, static export, metadata | Integrated SEO and portable static output with minimal infrastructure | No |
 | React + TypeScript strict mode | component UI and contracts | Type safety and accessible component composition | No |
 | CSS Modules/global token CSS | design system and responsive layout | Avoids a Tailwind/component-library dependency for a small bespoke site | No |
 | JSON article records | source-controlled content | One-file publishing, runtime validation, framework-neutral CMS migration | No |
@@ -22,18 +22,17 @@ Rejected for current scope: a database and authentication (no persistent user da
 
 ## Rendering Strategy
 
-- Static generation: Home, About, FAQ, Privacy, individual article pages, sitemap, robots, and 404.
-- Dynamic server rendering: the Articles index reads the incoming topic query before hydrating its small search client island.
-- Server rendering/build-time filesystem work: article discovery/validation, route generation, metadata, JSON-LD, and article HTML.
-- Client rendering only: mobile menu, search/filter state, accordion interaction, collapsible mobile table of contents, and contact submission state.
-- Dynamic server endpoint: `POST /api/contact`; no contact data is persisted.
+- Static generation: every public page, article, sitemap, robots file, and 404 is exported at build time.
+- Build-time filesystem work: article discovery/validation, route generation, metadata, JSON-LD, and article HTML.
+- Client rendering only: mobile menu, URL-aware search/filter state, accordion interaction, collapsible mobile table of contents, and email-draft preparation.
+- Static-hosting compatibility: the Pages base path is applied to Next links, images, assets, canonicals, sitemap entries, and JSON-LD.
 
 ## Application Architecture
 
 ```text
 content/articles/*.json       medically governed content records
 public/images/                owned local SVG artwork and social image
-src/app/                      App Router pages, metadata files, API route
+src/app/                      App Router pages and metadata files
 src/components/
   article/                    reusable reading components
   forms/                      contact interaction
@@ -50,7 +49,7 @@ docs/                         operational and architectural documentation
 
 ## Routing Architecture
 
-`/`, `/articles`, `/articles/[slug]`, `/about`, `/faq`, `/contact`, `/privacy`, `/api/contact`, `/robots.txt`, `/sitemap.xml`, and the global not-found route. Topic filtering uses `/articles?topic=<slug>`.
+`/`, `/articles`, `/articles/[slug]`, `/about`, `/faq`, `/contact`, `/privacy`, `/robots.txt`, `/sitemap.xml`, and the global not-found route. Topic filtering uses `/articles?topic=<slug>` and initializes in the browser so the index remains statically exportable.
 
 ## Content Architecture
 
@@ -60,9 +59,9 @@ Each JSON record contains metadata plus structured blocks, FAQs, references, cal
 
 The server passes a small serializable index to one client component. Normalized query tokens match title, excerpt, topic labels, and keywords; a topic filter composes with the query. See [SEARCH_ARCHITECTURE.md](SEARCH_ARCHITECTURE.md).
 
-## Contact Form Architecture
+## Contact Architecture
 
-The client posts JSON to a same-origin route. The route checks content type, field lengths, email syntax, honeypot, minimum completion time, and a best-effort IP window before optionally calling the Resend HTTPS API with server-only variables. Missing configuration returns a transparent `503`. No medical files or records are accepted.
+The client validates the three general-message fields and opens a prefilled `mailto:` draft only when an owner-approved public recipient is configured. The website neither transmits nor stores the draft and never claims delivery. Without an address, it renders an explicit unavailable state. No medical files or records are accepted.
 
 ## SEO Architecture
 
@@ -70,7 +69,7 @@ Root metadata supplies safe defaults; each page overrides title/description/cano
 
 ## Error Handling
 
-Unknown slugs call `notFound()`. Content validation fails the build with a filename-specific error. The contact API returns generic user-safe responses and status codes. Search provides an actionable empty state. Local illustrations avoid remote image failures.
+Unknown slugs call `notFound()`. Content validation fails the build with a filename-specific error. The contact component reports missing configuration without rendering unusable controls. Search provides an actionable empty state. Local illustrations avoid remote image failures.
 
 ## Image Architecture
 
@@ -78,7 +77,7 @@ Owned, non-clinical SVG illustrations live in `public/images`; metadata defines 
 
 ## Configuration Architecture
 
-`src/config/site.ts` owns the supplied Her HealthBloom brand, owner credentials, provisional URL, descriptions, navigation, and disclaimers. `src/config/topics.ts` owns category labels, descriptions, and icon keys. Environment overrides affect deployment URL and server-only email delivery.
+`src/config/site.ts` owns the supplied Her HealthBloom brand, owner credentials, provisional URL, base-path/absolute-URL helpers, descriptions, navigation, and disclaimers. `src/config/topics.ts` owns category labels, descriptions, and icon keys. The Pages workflow supplies deployment URL/path values; an optional public email variable controls contact availability.
 
 ## Future CMS Architecture and Scalability
 
@@ -88,14 +87,14 @@ The UI depends on normalized `Article` objects, not the filesystem. A future ada
 
 ```mermaid
 flowchart TD
-  B[Browser] --> N[Next.js application]
-  N --> P[Static pages and article template]
-  P --> L[Validated content adapter]
-  L --> J[content/articles JSON]
+  J[content/articles JSON] --> L[Validated content adapter]
+  L --> N[Next.js static export]
+  G[GitHub Actions] --> N
+  N --> P[GitHub Pages artifact]
+  B[Browser] --> P
   B --> C[Contact form]
-  C --> A[POST /api/contact]
-  A -->|configured| R[Resend HTTPS API]
-  A -->|not configured| U[Explicit unavailable response]
+  C -->|configured| E[Visitor email application]
+  C -->|not configured| U[Explicit unavailable state]
 ```
 
 ## Architecture Quality Gate
@@ -106,4 +105,4 @@ flowchart TD
 - [x] Layout, FAQ, references, warnings, and disclaimers are reusable
 - [x] Branding, domain, and contact settings are centralized
 - [x] No database, authentication, unnecessary client JavaScript, or hardcoded secret
-- [x] Mobile, accessibility, and Vercel requirements are represented
+- [x] Mobile, accessibility, static export, and GitHub Pages base-path requirements are represented

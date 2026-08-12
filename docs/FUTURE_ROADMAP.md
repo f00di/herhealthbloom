@@ -2,7 +2,7 @@
 
 ## Current Scope
 
-Six public destinations, six health topics, two complete source-backed articles, reusable article rendering, local search/filtering, an optional email-backed contact endpoint, SEO primitives, accessibility, security basics, tests, and Vercel deployment documentation.
+Six public destinations, six health topics, two complete source-backed articles, reusable article rendering, local search/filtering, optional email-draft contact, SEO primitives, accessibility, security basics, tests, and GitHub Pages deployment automation/documentation.
 
 ## Possible Future Work
 

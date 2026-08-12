@@ -14,21 +14,20 @@ async function completeForm() {
 }
 
 describe("ContactForm", () => {
-  it("announces a successful server response and clears the fields", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => ({ message: "Your message has been sent." }) }));
-    render(<ContactForm />);
+  it("opens a prefilled email draft without claiming delivery", async () => {
+    const open = vi.fn();
+    vi.stubGlobal("open", open);
+    render(<ContactForm contactEmail="hello@example.com" />);
     const user = await completeForm();
-    await user.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByText("Your message has been sent.")).toHaveAttribute("role", "status");
-    expect(screen.getByLabelText(/Name/)).toHaveValue("");
+    await user.click(screen.getByRole("button", { name: "Prepare email" }));
+    expect(open).toHaveBeenCalledWith(expect.stringMatching(/^mailto:hello@example\.com\?/), "_self");
+    expect(screen.getByRole("status")).toHaveTextContent("Review the message there and send it");
+    expect(screen.getByLabelText(/Name/)).toHaveValue("QA Reader");
   });
 
-  it("announces delivery configuration errors without claiming success", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: false, json: async () => ({ message: "Message delivery is not configured yet." }) }));
-    render(<ContactForm />);
-    const user = await completeForm();
-    await user.click(screen.getByRole("button", { name: "Send message" }));
-    expect(await screen.findByRole("alert")).toHaveTextContent("Message delivery is not configured yet.");
-    expect(screen.getByLabelText(/Name/)).toHaveValue("QA Reader");
+  it("shows a transparent unavailable state when no public email is configured", () => {
+    render(<ContactForm contactEmail={null} />);
+    expect(screen.getByText("Contact email not yet published.")).toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
   });
 });

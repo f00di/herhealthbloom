@@ -18,7 +18,7 @@ Unchecked items have not been verified. Automated checks do not substitute for m
 - [x] Keyboard/component interaction pass
 - [x] Visible focus and contrast token review
 - [x] Semantic headings/landmarks
-- [x] Form/disclosure announcements covered by implementation/tests
+- [x] Contact validation/status and disclosure behavior covered by implementation/tests
 - [ ] 200%/400% zoom and manual screen-reader matrix
 - [x] Reduced-motion behavior inspected
 
@@ -36,8 +36,8 @@ Unchecked items have not been verified. Automated checks do not substitute for m
 - [x] Source urgent advice preserved and prominent
 - [x] Disclaimers consistent and not obstructive
 
-## Forms
-- [x] Client/server required, syntax, length, spam, rate, loading, success, error states implemented/tested
+## Contact
+- [x] Client required/syntax/length checks, mailto draft, transparent unavailable state, and no false delivery claim tested
 - [x] No upload or sensitive medical-information request
 
 ## Search
@@ -56,11 +56,11 @@ Unchecked items have not been verified. Automated checks do not substitute for m
 - [x] No unnecessary third-party or client script
 
 ## Security and Privacy
-- [x] Headers and hostile input tested locally
+- [x] Static data flow, public-variable boundary, and platform header limitation reviewed
 - [x] Secrets scan and dependency audit completed
 - [x] Policy matches actual data flow/vendors
 
 ## Deployment
-- [x] Clean reproducible local production build
+- [x] Clean reproducible local static export with simulated Pages base path
 - [ ] Preview and production smoke checks
 - [ ] Rollback and ownership recovery confirmed

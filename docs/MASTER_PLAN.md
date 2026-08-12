@@ -69,10 +69,10 @@ This roadmap is governed by [PROJECT_SUMMARY.md](../PROJECT_SUMMARY.md). Checkma
 ## Phase 8 — Security
 
 **Objective:** minimize the public site/contact attack surface.  
-**Tasks:** [x] validation; [x] honeypot/timing controls; [x] rate-limit architecture; [x] safe errors; [x] headers; [x] secret boundaries; [x] audit.  
-**Dependencies:** contact endpoint.  
-**Completion criteria:** hostile input is rejected and no secret reaches client code.  
-**Known risk:** in-memory rate limits are best effort on serverless infrastructure.
+**Tasks:** [x] client validation; [x] static-only data flow; [x] no false delivery state; [x] secret boundaries; [x] dependency audit; [x] platform-header limitation documented.
+**Dependencies:** static contact experience and GitHub Pages.
+**Completion criteria:** no application server receives user input and no secret reaches client code.
+**Known risk:** GitHub Pages does not allow repository-controlled response headers.
 
 ## Phase 9 — Performance
 
@@ -92,11 +92,11 @@ This roadmap is governed by [PROJECT_SUMMARY.md](../PROJECT_SUMMARY.md). Checkma
 
 ## Phase 11 — Deployment
 
-**Objective:** reproducible GitHub-to-Vercel delivery.  
-**Tasks:** [x] environment template; [x] build configuration; [x] deployment guide; [x] headers; [x] smoke-test plan; [x] rollback plan.  
+**Objective:** reproducible GitHub Actions-to-Pages delivery.
+**Tasks:** [x] environment template; [x] static-export/base-path configuration; [x] deployment workflow; [x] deployment guide; [x] smoke-test plan; [x] rollback plan.
 **Dependencies:** passing checks and owner configuration.  
 **Completion criteria:** repository is deployable; live launch gates may remain unchecked.  
-**Known risk:** domain, sender, recipient, and provider credentials are unconfirmed.
+**Known risk:** custom domain and optional public recipient are unconfirmed.
 
 ## Phase 12 — Post-launch Maintenance
 

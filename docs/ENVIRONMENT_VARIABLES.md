@@ -1,10 +1,11 @@
 # Environment Variables
 
-| Variable | Required | Server/Client | Purpose |
+| Variable | Required | Exposure | Purpose |
 |---|---:|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Production: yes | Public | Exact canonical HTTPS origin, with no path; not a secret |
-| `RESEND_API_KEY` | Only for live contact email | Server only | Authenticate Resend API requests |
-| `CONTACT_TO_EMAIL` | Only for live contact email | Server only | Approved recipient mailbox; not displayed automatically |
-| `CONTACT_FROM_EMAIL` | Only for live contact email | Server only | Verified sender identity used by Resend |
+| `NEXT_PUBLIC_SITE_URL` | Production: automatic | Public | Full canonical Pages URL, including the project path and no trailing slash |
+| `PAGES_BASE_PATH` | Production: automatic | Build only | Project path returned by GitHub Pages, such as `/herhealthbloom` |
+| `NEXT_PUBLIC_CONTACT_EMAIL` | Optional | Public | Owner-approved recipient used to prepare a `mailto:` draft |
 
-Missing email variables keep the contact route safely disabled. `.env.example` must contain placeholders only. Variables are configured in Vercel per environment; local values belong in ignored `.env.local`.
+The Pages workflow supplies the URL and base path from `actions/configure-pages`. Add `NEXT_PUBLIC_CONTACT_EMAIL` as a GitHub Actions repository variable only if publishing the mailbox is approved. It is embedded in the static site and is not a secret.
+
+For local testing, copy `.env.example` to ignored `.env.local` and use placeholders or approved values. Never commit `.env` files or put credentials in `NEXT_PUBLIC_` variables.
