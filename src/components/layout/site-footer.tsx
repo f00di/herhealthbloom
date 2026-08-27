@@ -8,7 +8,7 @@ export function SiteFooter() {
       <div className="container footer-grid">
         <div className="footer-about">
           <p className="footer-brand">{siteConfig.siteName}</p>
-          <p>Clear educational information about women’s health under the supervision of {siteConfig.author.name}, {siteConfig.author.credentials}.</p>
+          <p>Evidence-Based information and Education in Gynecology, Pregnancy, and Breast Health</p>
         </div>
         <nav aria-label="Footer navigation">
           <h2>Explore</h2>
@@ -20,7 +20,7 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="container footer-bottom">
-        <p>{siteConfig.medicalDisclaimer} Consult an appropriate healthcare professional about medical questions and seek urgent care for emergencies.</p>
+        <p>{siteConfig.medicalDisclaimer} Always seek the advice of your healthcare provider with any questions you may have regarding a medical condition, pregnancy, or reproductive health. Never disregard professional medical advice or delay seeking it because of something you have read or seen on this website.</p>
         <p>{siteConfig.copyright}</p>
       </div>
     </footer>

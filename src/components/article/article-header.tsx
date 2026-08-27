@@ -21,9 +21,8 @@ export function ArticleHeader({ article }: { article: Article }) {
   return <header className="article-header">
     <Link className="topic-label" href={`/articles?topic=${article.category}`}>{topic?.title}</Link>
     <h1>{article.title}</h1>
-    <p className="article-deck">{article.excerpt}</p>
+    {article.featuredImage ? <div className="article-featured-image"><Image src={withBasePath(article.featuredImage.src)} alt={article.featuredImage.alt} width={article.featuredImage.width} height={article.featuredImage.height} priority sizes="(max-width: 900px) 100vw, 840px" /></div> : null}
     <ArticleMeta article={article} />
     {article.contentStatus !== "complete" ? <p className="content-status"><strong>Content status:</strong> Authoritative source document missing. Clinical content is not published.</p> : null}
-    {article.featuredImage ? <div className="article-featured-image"><Image src={withBasePath(article.featuredImage.src)} alt={article.featuredImage.alt} width={article.featuredImage.width} height={article.featuredImage.height} priority sizes="(max-width: 900px) 100vw, 840px" /></div> : null}
   </header>;
 }

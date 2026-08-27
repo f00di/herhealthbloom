@@ -13,7 +13,7 @@ export const siteConfig = {
   socialLinks: [] as { label: string; href: string }[],
   copyright: "© 2026 Dr. Farkhanda Kashif. All rights reserved.",
   medicalDisclaimer:
-    "This website provides educational and informational women's health content and is not a substitute for professional medical advice, diagnosis, or treatment.",
+    "The information on this website is for educational and informational purposes only and is not intended as medical advice. This content is not a substitute for professional medical advice, diagnosis, or treatment.",
 } as const;
 
 export const primaryNavigation = [

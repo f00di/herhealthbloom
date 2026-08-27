@@ -13,6 +13,7 @@ export type ContentBlock =
   | { type: "heading"; level: 2 | 3; id: string; text: string }
   | { type: "paragraph"; text: string }
   | { type: "list"; style: "ordered" | "unordered"; items: string[] }
+  | { type: "image"; src: string; alt: string; width: number; height: number }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "medical-callout"; title: string; text: string; tone?: "note" | "important" }
   | { type: "emergency-warning"; title: string; text: string };

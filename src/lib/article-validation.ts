@@ -48,6 +48,15 @@ function parseBlock(value: unknown, file: string, index: number): ContentBlock {
     if (style !== "ordered" && style !== "unordered") throw new Error(`${file}: invalid list style`);
     return { type, style, items: stringArray(value.items, "items", file) };
   }
+  if (type === "image") {
+    const src = requiredString(value, "src", file);
+    const width = value.width;
+    const height = value.height;
+    if (!src.startsWith("/images/") || typeof width !== "number" || width <= 0 || typeof height !== "number" || height <= 0) {
+      throw new Error(`${file}: invalid image at body[${index}]`);
+    }
+    return { type, src, alt: requiredString(value, "alt", file), width, height };
+  }
   if (type === "table") {
     const headers = stringArray(value.headers, "headers", file);
     if (!Array.isArray(value.rows) || !value.rows.every((row) => Array.isArray(row) && row.length === headers.length && row.every((cell) => typeof cell === "string"))) {

@@ -15,9 +15,10 @@ describe("article content", () => {
     const healthyEating = records.find((item) => item.slug === "healthy-eating-during-pregnancy");
     expect(abdominalPain?.faq).toHaveLength(7);
     expect(abdominalPain?.references).toHaveLength(13);
-    expect(abdominalPain?.body.some((block) => block.type === "emergency-warning")).toBe(true);
+    expect(abdominalPain?.body.filter((block) => block.type === "image")).toHaveLength(8);
     expect(healthyEating?.faq).toHaveLength(6);
     expect(healthyEating?.references).toHaveLength(8);
+    expect(healthyEating?.body.filter((block) => block.type === "image")).toHaveLength(25);
     expect(healthyEating?.body.some((block) => block.type === "heading" && block.id === "foods-to-limit-or-avoid")).toBe(true);
   });
   it("rejects an unknown category", () => {
