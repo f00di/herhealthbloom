@@ -13,8 +13,8 @@ export const metadata: Metadata = {
   description: siteConfig.siteDescription,
   applicationName: siteConfig.siteName,
   alternates: { canonical: getSiteUrl() },
-  openGraph: { type: "website", siteName: siteConfig.siteName, title: siteConfig.siteName, description: siteConfig.siteDescription, url: getSiteUrl(), images: [{ url: getAbsoluteUrl("/images/social-card.png"), width: 1200, height: 630, alt: `${siteConfig.siteName} by ${siteConfig.author.name}` }] },
-  twitter: { card: "summary_large_image", title: siteConfig.siteName, description: siteConfig.siteDescription, images: [getAbsoluteUrl("/images/social-card.png")] },
+  openGraph: { type: "website", siteName: siteConfig.siteName, title: siteConfig.siteName, description: siteConfig.siteDescription, url: getSiteUrl(), images: [{ url: getAbsoluteUrl("/images/home/image1.png"), width: 1536, height: 1024, alt: `${siteConfig.siteName} by ${siteConfig.author.name}` }] },
+  twitter: { card: "summary_large_image", title: siteConfig.siteName, description: siteConfig.siteDescription, images: [getAbsoluteUrl("/images/home/image1.png")] },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

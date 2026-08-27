@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const article = await getArticleBySlug(slug);
   if (!article) return { title: "Article not found" };
   const shareableFeaturedImage = article.featuredImage && /\.(?:avif|jpe?g|png|webp)$/i.test(article.featuredImage.src) ? article.featuredImage : undefined;
-  const image = shareableFeaturedImage ? [{ url: getAbsoluteUrl(shareableFeaturedImage.src), width: shareableFeaturedImage.width, height: shareableFeaturedImage.height, alt: shareableFeaturedImage.alt }] : [{ url: getAbsoluteUrl("/images/social-card.png"), width: 1200, height: 630, alt: siteConfig.siteName }];
+  const image = shareableFeaturedImage ? [{ url: getAbsoluteUrl(shareableFeaturedImage.src), width: shareableFeaturedImage.width, height: shareableFeaturedImage.height, alt: shareableFeaturedImage.alt }] : [{ url: getAbsoluteUrl("/images/home/image1.png"), width: 1536, height: 1024, alt: siteConfig.siteName }];
   const articleUrl = getAbsoluteUrl(`/articles/${article.slug}`);
   return {
     title: article.metaTitle,

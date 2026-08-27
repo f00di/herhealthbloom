@@ -6,7 +6,7 @@ export function createPageMetadata(title: string, description: string, path: str
     title,
     description,
     alternates: { canonical: getAbsoluteUrl(path) },
-    openGraph: { type: "website", siteName: siteConfig.siteName, title, description, url: getAbsoluteUrl(path), images: [{ url: getAbsoluteUrl("/images/social-card.png"), width: 1200, height: 630, alt: `${siteConfig.siteName} by ${siteConfig.author.name}` }] },
-    twitter: { card: "summary_large_image", title, description, images: [getAbsoluteUrl("/images/social-card.png")] },
+    openGraph: { type: "website", siteName: siteConfig.siteName, title, description, url: getAbsoluteUrl(path), images: [{ url: getAbsoluteUrl("/images/home/image1.png"), width: 1536, height: 1024, alt: `${siteConfig.siteName} by ${siteConfig.author.name}` }] },
+    twitter: { card: "summary_large_image", title, description, images: [getAbsoluteUrl("/images/home/image1.png")] },
   };
 }
